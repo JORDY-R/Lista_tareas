@@ -1,0 +1,145 @@
+:root{
+    --primary: #A5c882;
+    --secondary: #d33f49;
+    --light: #fff;
+    --dark: #000;
+    --diabled: #e7e7e7;
+    --verde: #11a837;
+    --naranja: #ffa704;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    height: 100vh;
+    background-color: var(--diabled);
+}
+
+*::first-letter{
+    text-transform: capitalize;
+}
+
+.redondear {
+    border-radius: 5px;
+}
+
+.lista{
+    margin: 25px auto;
+    padding: 25px;
+    background-color: var(--light);
+    width: 100%;
+    max-width: 350px;
+    
+}
+
+.fecha{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fecha_iz{
+    display: flex;
+    align-items: center;
+}
+
+#fecha_num{
+    font-size: 50PX;
+}
+
+#fecha_dia{
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+#fecha_num,
+#fecha_mes,
+#fecha_dia{
+    font-weight: bold;
+}
+
+#fecha_mes,
+#fecha_ano{
+    margin-left: 7px;
+    font-size: 20px;
+}
+
+form {
+    margin: 20px 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto ;
+    grid-column-gap: 15px;
+}
+
+input{
+    border: none;
+    padding-left: 10px;
+    background-color: var(--diabled);
+}
+
+input:focus {
+    outline: none;
+}
+
+.addTaskButton,
+.orderButton{
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.addTaskButton{
+    height: 35px;
+    border-radius: 25px;
+    border: var(--dark) solid 1px;
+    font-size: 18px;
+    background-color: var(--diabled);
+    font-size: 18px;
+}
+
+.orderButton{
+    background-color: var(--secondary);
+    color: var(--light);
+    padding: 10px;
+    border: var(--dark) solid 1px;
+}
+
+.task {
+    background-color: var(--primary);
+    padding: 15px;
+    margin-top: 15px;
+    color: var(--light);
+    cursor: pointer;
+}
+
+.done{
+    background-color: var(--naranja);
+    color: var(--dark);
+}
+
+/* Nuevos cambios */
+.contenedor{
+    display: flex;
+    justify-content: space-between;
+}
+
+.lista_2{
+    text-align: center;
+    margin: 25px auto;
+    padding: 25px;
+    background-color: var(--light);
+    width: 100%;
+    max-width: 350px;
+}
+
+.comienzo{
+    background-color: var(--verde);
+}
+
+.terminada{
+    text-decoration: line-through;
+    background-color: var(--diabled);
+    text-decoration: line-through;
+    color: var(--dark);
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado de tareas</title>
+    <link rel="stylesheet" href="Lista_tarea.css" />
+  </head>
+  <body>
+    <div class="contenedor">
+     <!-- Caja de tarear por hacer  -->
+      <div class="lista redondear">
+        <div class="fecha">
+          <div class="fecha_iz">
+            <div id="fecha_num"></div>
+            <div>
+              <div id="fecha_mes"></div>
+              <div id="fecha_ano"></div>
+            </div>
+          </div>
+          <div id="fecha_dia"></div>
+        </div>
+
+        <form onsubmit="addNewTask(event)">
+          <input type="text" name="taskText" autocomplete="off" placeholder="Nueva tarea" class="redondear"/>
+          <button type="submit" class="addTaskButton">Añadir</button>
+          <!-- boton para comenzar con las tareas -->
+          <button type="button" class="orderButton redondear comienzo" onclick="comenzar_tareas()"> Comenzar </button>
+        </form>
+
+        <div id="tasksContainer"></div>
+      </div>
+
+      <!-- Caja de tareas en curso -->
+       <div id="Tarea_proceso" class="lista_2">
+        <h1>Tarea en proceso</h1>
+        <button type="button" class="orderButton redondear" onclick="Tarea_finalizada()"> Tarea Terminada </button>
+
+       </div>
+
+      <!-- Caja de tareas terminadas -->
+       <div id="tarea_terminada" class="lista_2">
+            <h1>Tarea terminadas</h1>
+       </div>
+    </div>
+
+    <script src="Lista_tarea.js"></script>
+  </body>
+</html>
