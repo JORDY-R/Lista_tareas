@@ -30,15 +30,34 @@ const addNewTask = event => {
 
     const tarea = document.createElement('div');
     tarea.classList.add('task', 'redondear');
-    tarea.addEventListener('click', changeTaskstate );
     tarea.textContent = value;
+
+    //añadir funcion de eliminar
+    const eliminar = document.createElement('button');
+    eliminar.textContent = 'X';
+    eliminar.classList.add('eliminar');
+    eliminar.style.display = 'none'; //para que al comienzo se oculte
+    eliminar.addEventListener('click', () => tarea.remove() ) //elimia la tarea
+    
+    tarea.addEventListener('click', () => changeTaskstate(tarea, eliminar) );
+
+    //agrega el boton de eliminar
+    tarea.appendChild(eliminar);
+    //
     Contenedor_tareas.prepend(tarea);
     event.target.reset();
 };
 
 // añade clase para identificar que tarea esta en proceso
-const changeTaskstate = event => {
-    event.target.classList.toggle('done');
+const changeTaskstate = (tarea, eliminar) => {
+    tarea.classList.toggle('done');
+
+    //para mostrar el boton cuando de click
+    if (tarea.classList.contains('done')){
+        eliminar.style.display = 'inline-block';
+    } else{
+        eliminar.style.display = 'none';
+    }
 };
 
 //añade clase para identificar que tarea termino
@@ -57,9 +76,9 @@ const Tarea_terminada = event =>{
 //     return [...terminado,...hecho];
 // };
 
-const renderOrderedTasks = () => {
-    ordenar().forEach(i => Contenedor_tareas.appendChild(i));
-};
+// const renderOrderedTasks = () => {
+//     ordenar().forEach(i => Contenedor_tareas.appendChild(i));
+// };
 
 const comenzar_tareas = () =>{
 
@@ -75,13 +94,10 @@ const comenzar_tareas = () =>{
 
      // Mover las tareas seleccionadas a "Tarea en proceso"
     proceso.forEach(tarea => {
-        tareas_proceso.appendChild(tarea);
-    });
-
-    proceso.forEach(tarea => {
+        tarea.querySelector('.eliminar').style.display = 'none';
         tarea.addEventListener('click', Tarea_terminada); // Ahora sí agregamos el event listener correctamente
         tareas_proceso.appendChild(tarea);
-    });
+    });    
 };
 
 // Función para mover tareas a "Tareas terminadas"

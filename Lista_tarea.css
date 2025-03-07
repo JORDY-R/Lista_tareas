@@ -6,6 +6,7 @@
     --diabled: #e7e7e7;
     --verde: #11a837;
     --naranja: #ffa704;
+    --rojo: #850101;
 }
 
 body{
@@ -111,6 +112,9 @@ input:focus {
     margin-top: 15px;
     color: var(--light);
     cursor: pointer;
+    /* Para que cada elemento del div de la tarea vaya a las esquinas */
+    display: flex;
+    justify-content: space-between;
 }
 
 .done{
@@ -142,4 +146,14 @@ input:focus {
     background-color: var(--diabled);
     text-decoration: line-through;
     color: var(--dark);
+    font-weight: bold;
+}
+
+.eliminar{
+    width: 38px;
+    height: 20px;
+    background: var(--rojo);
+    color: var(--diabled);
+    font-size: 18px;
+    border: none;
 }
