@@ -5,6 +5,7 @@
     --dark: #000;
     --diabled: #e7e7e7;
     --verde: #11a837;
+    --verde-agua: #3feb6a;
     --naranja: #ffa704;
     --rojo: #850101;
 }
@@ -110,7 +111,7 @@ input:focus {
     background-color: var(--primary);
     padding: 15px;
     margin-top: 15px;
-    color: var(--light);
+    color: var(--dark);
     cursor: pointer;
     /* Para que cada elemento del div de la tarea vaya a las esquinas */
     display: flex;
@@ -149,11 +150,31 @@ input:focus {
     font-weight: bold;
 }
 
+/* boton eliminar */
 .eliminar{
     width: 38px;
-    height: 20px;
+    height: 22px;
     background: var(--rojo);
     color: var(--diabled);
     font-size: 18px;
     border: none;
+    position: relative;
+    left: 89px auto;
+    cursor: pointer;
+}
+
+/* Boton editar */
+.editar{
+    width: 38px;
+    height: 22px;
+    background-color: var(--verde-agua);
+    border: none;
+    cursor: pointer;
+}
+
+/* estulos del input de editar */
+.tarea_editada{
+    background: none;
+    font-weight: bold;
+    color: var(--light);
 }

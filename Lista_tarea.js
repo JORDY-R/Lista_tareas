@@ -26,38 +26,100 @@ const setDate = () => {
 const addNewTask = event => {
     event.preventDefault();
     const { value } = event.target.taskText;
-    if(!value) return;
+    if(!value) {
+        return;
+    } else if (value.length > 32){
+        alert("Error: Ah excedido el número de caracteres permitido");
+        event.target.reset();
+        return;
+    };
 
     const tarea = document.createElement('div');
     tarea.classList.add('task', 'redondear');
     tarea.textContent = value;
 
-    //añadir funcion de eliminar
+    //añadir un boton de eliminar tarea
     const eliminar = document.createElement('button');
     eliminar.textContent = 'X';
     eliminar.classList.add('eliminar');
     eliminar.style.display = 'none'; //para que al comienzo se oculte
     eliminar.addEventListener('click', () => tarea.remove() ) //elimia la tarea
     
-    tarea.addEventListener('click', () => changeTaskstate(tarea, eliminar) );
+    //añadir un boton para editar la tarea
+    const editar = document.createElement('button');
+    editar.textContent = '✏️' ;
+    editar.classList.add('editar');
+    editar.style.display = 'none';
+    editar.addEventListener('click', () => editarTarea(tarea));
+
+    //para mostrar botones
+    tarea.addEventListener('click', () => changeTaskstate(tarea, eliminar,editar) );
+
 
     //agrega el boton de eliminar
     tarea.appendChild(eliminar);
+    tarea.appendChild(editar);
     //
     Contenedor_tareas.prepend(tarea);
     event.target.reset();
 };
 
+const editarTarea = (tarea) => {
+    // Obtener el texto actual de la tarea
+    const textoActual = tarea.firstChild.textContent; 
+
+    // Crear un nuevo input para edición
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = textoActual;
+    input.classList.add('tarea_editada');
+
+    // Guardamos los botones para no perderlos
+    const botones = [...tarea.querySelectorAll('button')];
+
+    // Limpiar el contenido de la tarea y agregar el input
+    tarea.textContent = '';
+    tarea.appendChild(input);
+
+    // Volver a agregar los botones después del input
+    botones.forEach(boton => tarea.appendChild(boton));
+
+    // Guardar cambios al presionar "Enter"
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const nuevoTexto = input.value.trim();
+            if (nuevoTexto) {
+                // Restaurar el texto editado sin eliminar los botones
+                tarea.textContent = nuevoTexto;
+                botones.forEach(boton => tarea.appendChild(boton));
+            } else {
+                // Si el input está vacío, restaurar el texto original
+                tarea.textContent = textoActual;
+                botones.forEach(boton => tarea.appendChild(boton));
+            }
+        }
+    });
+
+    input.focus();
+};
+
+
 // añade clase para identificar que tarea esta en proceso
-const changeTaskstate = (tarea, eliminar) => {
+const changeTaskstate = (tarea, eliminar, editar) => {
     tarea.classList.toggle('done');
 
     //para mostrar el boton cuando de click
     if (tarea.classList.contains('done')){
         eliminar.style.display = 'inline-block';
+        editar.style.display = 'inline-block';
     } else{
         eliminar.style.display = 'none';
-    }
+        editar.style.display = 'none';
+    };
+
+    if(tarea.classList.contains('eliminar_editar')){
+        editar.style.display = 'none';
+    };
 };
 
 //añade clase para identificar que tarea termino
@@ -94,7 +156,9 @@ const comenzar_tareas = () =>{
 
      // Mover las tareas seleccionadas a "Tarea en proceso"
     proceso.forEach(tarea => {
-        tarea.querySelector('.eliminar').style.display = 'none';
+        tarea.classList.add('eliminar_editar');
+        tarea.querySelector('.editar').style.display = 'none';
+        tarea.removeEventListener('click', editarTarea);
         tarea.addEventListener('click', Tarea_terminada); // Ahora sí agregamos el event listener correctamente
         tareas_proceso.appendChild(tarea);
     });    
